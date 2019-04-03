@@ -83,25 +83,5 @@ public class FileExplorer extends AppCompatActivity implements FileAdapter.OnIte
         return mimeType;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                if (!currentDir.equals(rootDir.getAbsolutePath())) {
-                    currentDir = new File(currentDir).getParent();
-                    File parentFile = new File(currentDir);
-                    files = Arrays.asList(parentFile.listFiles());
-                    adapter.setFiles(files);
-                    return true;
-                } else {
-                    super.onBackPressed();
-                }
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-
 
 }
