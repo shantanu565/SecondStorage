@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -55,6 +57,18 @@ public class ShareImageActivity extends AppCompatActivity {
     }
 
     public void shareprivate(View v){
+        if(file1==null){
+            Toast.makeText(this, "Please Click a Picture First", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent shareIntent2 = new Intent();
+        shareIntent2.setAction(Intent.ACTION_SEND);
+        shareIntent2.setType("image/*");
+        shareIntent2.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(this,
+                getPackageName() + ".provider", file1));
+        shareIntent2.putExtra(Intent.EXTRA_TEXT, "This image was inside 'App's Private Space'");
+        shareIntent2.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        startActivity(Intent.createChooser(shareIntent2, "Send to"));
 
 
     }
